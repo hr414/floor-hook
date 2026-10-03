@@ -10,13 +10,13 @@ import {V4} from "../src/desk/v4/V4.sol";
 ///   forge script script/HookTestPool.s.sol --sig "deploy()" --rpc-url robinhood --broadcast --private-key $KEY
 ///   POOL=0x... forge script script/HookTestPool.s.sol --sig "register()" --rpc-url robinhood --broadcast --private-key $KEY
 ///   POOL=0x... forge script script/HookTestPool.s.sol --sig "open()" --rpc-url robinhood --broadcast --private-key $KEY
-/// `open` adds 0.01 ETH against 10M test tokens. Later, `close()` then `withdraw()` on the pool return it.
+/// `open` adds 0.005 ETH against 5M test tokens. Later, `close()` then `withdraw()` on the pool return it.
 contract HookTestPoolScript is Script {
     FloorHook constant HOOK = FloorHook(payable(0x7d309A342f12e7f788CCF992740E5C482D4B6044));
     /// floor.top's platform wallet: where the pool's platform share goes
     address constant PLATFORM = 0x6C87a58B5050360F29EEBb914490c25C68923394;
-    uint256 constant ETH_IN = 0.01 ether;
-    uint256 constant TOKENS_IN = 10_000_000e18;
+    uint256 constant ETH_IN = 0.005 ether;
+    uint256 constant TOKENS_IN = 5_000_000e18;
 
     function deploy() external {
         require(block.chainid == 4663, "Robinhood Chain mainnet only");

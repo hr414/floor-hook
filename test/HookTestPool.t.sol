@@ -34,7 +34,7 @@ contract HookTestPoolFork is Test, IUnlockCallbackV4 {
         HOOK.registerPool(key, address(pool), address(pool), PLATFORM, 100, 1000, 5000);
         vm.deal(owner, 1 ether);
         vm.prank(owner);
-        pool.open{value: 0.01 ether}(10_000_000e18);
+        pool.open{value: 0.005 ether}(5_000_000e18);
     }
 
     // ------------------------------------------------------------ swaps ----
@@ -71,7 +71,7 @@ contract HookTestPoolFork is Test, IUnlockCallbackV4 {
         assertGt(V4.liquidity(PM, id), 0);
         (uint160 sqrtPrice,) = V4.slot0(PM, id);
         uint256 tokensPerEth = Math.mulDiv(uint256(sqrtPrice) * sqrtPrice, 1, 1 << 192);
-        assertApproxEqRel(tokensPerEth, 1_000_000_000, 1e12, "10M tokens against 0.01 ETH");
+        assertApproxEqRel(tokensPerEth, 1_000_000_000, 1e12, "5M tokens against 0.005 ETH");
     }
 
     function test_SwapsBothWaysPayTheHookOnePercent() public {
@@ -102,7 +102,7 @@ contract HookTestPoolFork is Test, IUnlockCallbackV4 {
         pool.close();
         pool.withdraw();
         vm.stopPrank();
-        assertApproxEqAbs(owner.balance - before, 0.01 ether, 1e6, "the test ETH comes back");
+        assertApproxEqAbs(owner.balance - before, 0.005 ether, 1e6, "the test ETH comes back");
         assertEq(pool.liquidity(), 0);
     }
 

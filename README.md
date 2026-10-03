@@ -42,6 +42,15 @@ forge build
 
 ## Test pool
 
+**Live on Robinhood Chain** (opened 2026-10-03 with 0.005 ETH against 5M FHTEST):
+
+| | |
+| --- | --- |
+| Pool id | `0x3e0da69e155a172029e88f4efedc5b7688cea18b7cf8875cf7e43261aa0fc650` |
+| Pool key | ETH `0x0000000000000000000000000000000000000000` / FHTEST `0xcfbc42e8AE292d1f83596e90750fD2e6C6c09c5f`, fee 0, tick spacing 200, hook `0x7d309A342f12e7f788CCF992740E5C482D4B6044` |
+| HookTestPool | [`0x3BE3C58b0074B29482b1Cc185Ca43b2e4669a65E`](https://robinhoodchain.blockscout.com/address/0x3BE3C58b0074B29482b1Cc185Ca43b2e4669a65E) |
+| Transactions | deploy `0x5074753b9f57ad69a8a2c3bebddd8dcd5b102c93b570e69ca884f6f21a2b7c02`, register `0x274c342678c7b946c1896bb0416b6f18a7ced3c049d13a6951da0dc379c20bc9`, open `0xa59a3a2a49af508eace1c6c46f08546c7beda72045d35787fc227fb5955f4ddd` |
+
 [`src/testing/HookTestPool.sol`](src/testing/HookTestPool.sol) opens a pool on the live hook with a worthless test token ("floor.top hook test", FHTEST), standing in for a floor.top launch where the hook needs one. Its owner can remove the position again. [`script/HookTestPool.s.sol`](script/HookTestPool.s.sol) deploys, registers and opens it; [`test/HookTestPool.t.sol`](test/HookTestPool.t.sol) runs the whole thing on a fork of Robinhood Chain:
 
 ```sh
